@@ -1,21 +1,20 @@
 package GUI;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import Controller.*;
-
-
 import static GUI.Main_GUI.local_media_list;
 
 /**
- * Created by Steve on 14/10/2018.
+ *   Media Player GUI
+ *
+ *  Displays media selected by user
+ *
+ *  Displays media controls to user
  */
 public class Player_GUI {
 

@@ -12,7 +12,7 @@ import static GUI.Main_GUI.local_media_list;
 import static GUI.Main_GUI.server_media_list;
 import static GUI.Player_GUI.load_player_GUI;
 
-public class Controller {
+public class Main_Controller {
 
     /**
      * download

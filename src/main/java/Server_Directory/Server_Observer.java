@@ -1,6 +1,6 @@
 package Server_Directory;
 
-import Controller.Controller;
+import Controller.Main_Controller;
 import Interfaces.Observer_Interface;
 import javafx.application.Platform;
 
@@ -31,7 +31,7 @@ public class Server_Observer implements Observer_Interface {
         Platform.runLater(new Runnable(){               // allows update to run in separate thread
             @Override
             public void run() {
-                Controller.update();
+                Main_Controller.update();
             }
 
         });

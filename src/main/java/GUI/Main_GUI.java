@@ -1,6 +1,6 @@
 package GUI;
 
-import Controller.Controller;
+import Controller.Main_Controller;
 import Local_Directory.Local_File_Directory;
 import Server_Directory.*;
 import javafx.geometry.Insets;
@@ -100,7 +100,7 @@ public class Main_GUI {
 
             System.out.println("User Selected to Download: " + server_media_list.getSelectionModel().getSelectedItem());
 
-            Controller.download();
+            Main_Controller.download();
         });
 
 
@@ -114,7 +114,7 @@ public class Main_GUI {
 
             System.out.println("User Selected to Upload: " + local_media_list.getSelectionModel().getSelectedItem());
 
-            Controller.upload();
+            Main_Controller.upload();
         });
 
         // Play Button
@@ -127,7 +127,7 @@ public class Main_GUI {
 
             System.out.println("User Selected to Play: " + local_media_list.getSelectionModel().getSelectedItem());
 
-            Controller.play(); // Load Media Player
+            Main_Controller.play(); // Load Media Player
 
         });
 

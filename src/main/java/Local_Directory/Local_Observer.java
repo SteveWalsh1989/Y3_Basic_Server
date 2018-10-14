@@ -32,7 +32,7 @@ public class Local_Observer implements  Observer_Interface {
             @Override
             public void run() {
                 // place the code here, that you want to execute
-                Controller.update();
+                Main_Controller.update();
 
             }
 

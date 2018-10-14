@@ -15,7 +15,13 @@ import javafx.scene.layout.Region;
 
 
 /**
- * Created by Steve on 14/10/2018.
+ * Player_Controller
+ *
+ * Contains layout and functinoaity for media play controls
+ *
+ * Play/Pause button: changes depending on media status
+ * Volume slider to change volume
+ * Timer slider to fast forward or rewind and display duration/time progressed
  */
 public class Player_Controller extends BorderPane {
 
