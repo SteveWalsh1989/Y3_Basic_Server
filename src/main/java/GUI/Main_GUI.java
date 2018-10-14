@@ -3,7 +3,6 @@ package GUI;
 import Controller.Main_Controller;
 import Local_Directory.Local_File_Directory;
 import Server_Directory.*;
-import com.sun.javafx.scene.control.skin.ColorPalette;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,32 +29,22 @@ import javafx.stage.Stage;
  */
 public class Main_GUI {
 
-    public static HBox mainScreen;
-    public static Scene main_gui;
-
-    // Local media section
-    public static VBox        local_media_box;
-    public static Text        local_media_text;
     public static ListView    local_media_list;
 
-    // server media section
-    public static VBox        server_media_box;
-    public static Text        server_media_text;
     public static ListView    server_media_list;
 
     //buttons
-    public static Button download_button;
-    public static Button upload_button;
-    public static Button play_file_button;
-    public static Button clear_button;
+    private static Button download_button;
+    private static Button upload_button;
+    private static Button play_file_button;
 
 
     public static void load_GUI(Stage primaryStage){
 
 
-        mainScreen = new HBox();                                                        // create new vBox to tore options
+        HBox mainScreen = new HBox();
 
-        main_gui = new Scene(mainScreen, 650, 400);                       // Create the Scene // create new scene, add VBOX
+        Scene main_gui = new Scene(mainScreen, 650, 400);
 
         mainScreen.setStyle("-fx-background-color: #E3F1F7");
 
@@ -70,13 +58,13 @@ public class Main_GUI {
         // Server Media Section
         //---------------------------
 
-        server_media_box = new VBox();
+        VBox server_media_box = new VBox();
 
         server_media_box.setAlignment(Pos.CENTER);
 
         server_media_box.setSpacing(15);
 
-        server_media_text   = new Text("Server Media");                               // local media table title
+        Text server_media_text = new Text("Server Media");
 
         server_media_text.setFill(Color.valueOf("#3C5964"));
 
@@ -88,6 +76,7 @@ public class Main_GUI {
         server_media_list.setStyle("-fx-text-fill: #698A96");
 
 
+        //noinspection unchecked
         server_media_list.getItems().addAll(Server_File_Directory.fileNames);
 
         server_media_box.getChildren().addAll(server_media_text,server_media_list );
@@ -166,7 +155,7 @@ public class Main_GUI {
         Label spacingLabel = new Label();
 
         // clear button
-        clear_button = new Button("Clear");
+        Button clear_button = new Button("Clear");
 
         clear_button.setStyle("-fx-background-color: #E3F4FB");
         clear_button.setStyle("-fx-text-fill: #3C5964");
@@ -180,19 +169,19 @@ public class Main_GUI {
 
         });
 
-        center_section.getChildren().addAll(download_button,upload_button,play_file_button,spacingLabel, clear_button );
+        center_section.getChildren().addAll(download_button,upload_button,play_file_button,spacingLabel, clear_button);
 
 
         //---------------------------
         // Local Media Section
         //---------------------------
-        local_media_box = new VBox();
+        VBox local_media_box = new VBox();
 
         local_media_box.setAlignment(Pos.CENTER);
 
         local_media_box.setSpacing(15);
 
-        local_media_text   = new Text("Local Media");
+        Text local_media_text = new Text("Local Media");
 
         local_media_text.setFill(Color.valueOf("#3C5964"));
 
@@ -200,6 +189,7 @@ public class Main_GUI {
 
         local_media_list = new ListView();
 
+        //noinspection unchecked
         local_media_list.getItems().addAll(Local_File_Directory.fileNames);                   // add items from directory to list
 
         local_media_box.getChildren().addAll(local_media_text,local_media_list );            // add label and list to VBox
@@ -238,10 +228,12 @@ public class Main_GUI {
      *
      * Clears both list views
      */
-    public static void clear_selection(){
+    private static void clear_selection(){
 
-            local_media_list.getSelectionModel().select(null);
-            server_media_list.getSelectionModel().select(null);
+        //noinspection unchecked
+        local_media_list.getSelectionModel().select(null);
+        //noinspection unchecked
+        server_media_list.getSelectionModel().select(null);
 
 
     }

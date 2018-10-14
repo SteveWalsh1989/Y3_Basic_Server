@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Local_File_Directory implements Subject_Interface {
 
 
-    private ArrayList<Observer_Interface> observers = new ArrayList<>();
+    private final ArrayList<Observer_Interface> observers = new ArrayList<>();
 
     public static String[] fileNames;
 
@@ -70,9 +70,9 @@ public class Local_File_Directory implements Subject_Interface {
         System.out.println("----------------------");
 
 
-        for (int i = 0; i < (files.length); i++) {
+        for (String file : files) {
 
-            System.out.println(files[i]);
+            System.out.println(file);
         }
         System.out.println("----------------------");
 

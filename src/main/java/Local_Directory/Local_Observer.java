@@ -27,16 +27,9 @@ public class Local_Observer implements  Observer_Interface {
         Local_File_Directory.printFileNames(fileNames);
 
 
-
-        Platform.runLater(new Runnable(){               // allows update to run in separate thread
-            @Override
-            public void run() {
-                // place the code here, that you want to execute
-                Main_Controller.update();
-
-            }
-
-        });
+        // allows update to run in separate thread
+        // place the code here, that you want to execute
+        Platform.runLater(Main_Controller::update);
 
 
 

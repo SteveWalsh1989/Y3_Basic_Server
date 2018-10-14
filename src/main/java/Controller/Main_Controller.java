@@ -1,11 +1,8 @@
 package Controller;
 
-import GUI.*;
 import Local_Directory.Local_File_Directory;
 import Server_Directory.Server_File_Directory;
-import javafx.event.EventHandler;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 
 import static GUI.Main_GUI.local_media_list;
@@ -94,7 +91,9 @@ public class Main_Controller {
     public static void update(){
         local_media_list.getItems().clear();
         server_media_list.getItems().clear();
+        //noinspection unchecked
         local_media_list.getItems().addAll(Local_File_Directory.fileNames);
+        //noinspection unchecked
         server_media_list.getItems().addAll(Server_File_Directory.fileNames);
 
     }

@@ -10,32 +10,28 @@ import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 
 
 /**
  * Player_Controller
  *
- * Contains layout and functinoaity for media play controls
+ * Contains layout and functionality for media play controls
  *
  * Play/Pause button: changes depending on media status
  * Volume slider to change volume
  * Timer slider to fast forward or rewind and display duration/time progressed
  */
+@SuppressWarnings("ALL")
 public class Player_Controller extends BorderPane {
 
-    private MediaPlayer mp;
-    private MediaView mediaView;
+    private final MediaPlayer mp;
     private final boolean repeat = false;
     private boolean stopRequested = false;
     private boolean atEndOfMedia = false;
     private Duration duration;
-    private Slider timeSlider;
-    private Label playTime;
-    private Slider volumeSlider;
-    private HBox mediaBar;
-
+    private final Slider timeSlider;
+    private final Label playTime;
+    private final Slider volumeSlider;
 
 
     public Player_Controller(final MediaPlayer mp) {
@@ -43,14 +39,14 @@ public class Player_Controller extends BorderPane {
         // Basic Layout
         this.mp = mp;
         setStyle("-fx-background-color: #bfc2c7;");
-        mediaView = new MediaView(mp);
+        MediaView mediaView = new MediaView(mp);
         Pane mvPane = new Pane() {                };
         mvPane.getChildren().add(mediaView);
         mvPane.setStyle("-fx-background-color: black;");
         setCenter(mvPane);
 
         // Controls Bar
-        mediaBar = new HBox();
+        HBox mediaBar = new HBox();
         mediaBar.setAlignment(Pos.CENTER);
         mediaBar.setPadding(new Insets(5, 10, 5, 10));
         BorderPane.setAlignment(mediaBar, Pos.CENTER);
@@ -91,41 +87,33 @@ public class Player_Controller extends BorderPane {
         mp.currentTimeProperty().addListener(ov -> updateValues());
 
         // Change icon to || when playing media
-        mp.setOnPlaying(new Runnable() {
-            public void run() {
-                if (stopRequested) {
-                    mp.pause();
-                    stopRequested = false;
-                } else {
-                    playButton.setText("||");
-                }
+        mp.setOnPlaying(() -> {
+            if (stopRequested) {
+                mp.pause();
+                stopRequested = false;
+            } else {
+                playButton.setText("||");
             }
         });
 
         // change icon to > when paused
-        mp.setOnPaused(new Runnable() {
-            public void run() {
-                System.out.println("Video Paused");
+        mp.setOnPaused(() -> {
+            System.out.println("Video Paused");
+            playButton.setText(">");
+        });
+
+
+        mp.setOnReady(() -> {
+            duration = mp.getMedia().getDuration();
+            updateValues();
+        });
+
+        mp.setCycleCount(1);
+        mp.setOnEndOfMedia(() -> {
+            if (!repeat) {
                 playButton.setText(">");
-            }
-        });
-
-
-        mp.setOnReady(new Runnable() {
-            public void run() {
-                duration = mp.getMedia().getDuration();
-                updateValues();
-            }
-        });
-
-        mp.setCycleCount(repeat ? MediaPlayer.INDEFINITE : 1);
-        mp.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                if (!repeat) {
-                    playButton.setText(">");
-                    stopRequested = true;
-                    atEndOfMedia = true;
-                }
+                stopRequested = true;
+                atEndOfMedia = true;
             }
         });
 
@@ -181,28 +169,25 @@ public class Player_Controller extends BorderPane {
     }
 
 
-    protected void updateValues() {
+    private void updateValues() {
         if (playTime != null && timeSlider != null && volumeSlider != null) {
-            Platform.runLater(new Runnable() {
+            Platform.runLater(() -> {
+                Duration currentTime = mp.getCurrentTime();
+                playTime.setText(formatTime(currentTime, duration));
+                timeSlider.setDisable(duration.isUnknown());
+
+                if (!timeSlider.isDisabled()
+                        && duration.greaterThan(Duration.ZERO)
+                        && !timeSlider.isValueChanging()) {
+                    //noinspection deprecation
+                    timeSlider.setValue(currentTime.divide(duration).toMillis()
+                            * 100.0);
+                }
 
 
-                public void run() {
-                    Duration currentTime = mp.getCurrentTime();
-                    playTime.setText(formatTime(currentTime, duration));
-                    timeSlider.setDisable(duration.isUnknown());
-
-                    if (!timeSlider.isDisabled()
-                            && duration.greaterThan(Duration.ZERO)
-                            && !timeSlider.isValueChanging()) {
-                        timeSlider.setValue(currentTime.divide(duration).toMillis()
-                                * 100.0);
-                    }
-
-
-                    if (!volumeSlider.isValueChanging()) {
-                        volumeSlider.setValue((int)Math.round(mp.getVolume()
-                                * 100));
-                    }
+                if (!volumeSlider.isValueChanging()) {
+                    volumeSlider.setValue((int)Math.round(mp.getVolume()
+                            * 100));
                 }
             });
         }
@@ -217,6 +202,7 @@ public class Player_Controller extends BorderPane {
      * @param duration - total length of media
      * @return
      */
+    @SuppressWarnings("JavaDoc")
     private static String formatTime(Duration elapsed, Duration duration) {
         int intElapsed = (int)Math.floor(elapsed.toSeconds());
         int elapsedHours = intElapsed / (60 * 60);

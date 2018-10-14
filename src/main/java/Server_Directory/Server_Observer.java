@@ -7,7 +7,9 @@ import javafx.application.Platform;
 import java.io.File;
 
 /**
- * Created by Steve on 03/10/2018.
+ *
+ * Server interface
+ * Created by Steve on 06/10/2018.
  */
 public class Server_Observer implements Observer_Interface {
 
@@ -27,14 +29,8 @@ public class Server_Observer implements Observer_Interface {
         Server_File_Directory.printFileNames(fileNames);
 
 
-
-        Platform.runLater(new Runnable(){               // allows update to run in separate thread
-            @Override
-            public void run() {
-                Main_Controller.update();
-            }
-
-        });
+        // allows update to run in separate thread
+        Platform.runLater(Main_Controller::update);
 
 
 
