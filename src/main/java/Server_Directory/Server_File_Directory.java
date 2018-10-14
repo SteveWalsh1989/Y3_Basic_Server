@@ -1,10 +1,17 @@
+package Server_Directory;
+
+import Interfaces.Observer_Interface;
+import Interfaces.Subject_Interface;
+
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by Steve on 03/10/2018.
+ * Server File directory subject class
+ *
+ * Stores list of observers for a directory
  */
-public class File_Directory implements Subject_Interface {
+public class Server_File_Directory implements Subject_Interface {
 
 
     private ArrayList<Observer_Interface> observers = new ArrayList<>();
@@ -13,7 +20,7 @@ public class File_Directory implements Subject_Interface {
 
     public static boolean hasChanged = false;
 
-    public File_Directory() {
+    public Server_File_Directory() {
     }
 
     /**
@@ -60,13 +67,14 @@ public class File_Directory implements Subject_Interface {
 
     public static void printFileNames(String[] files){
 
+        System.out.println("Server Directory Files:");
+
         for (int i = 0; i < (files.length); i++) {
+
 
             System.out.println(files[i]);
         }
 
-       // Controller.add_files_to_Table(files, GUI.local_media_table);  // not working
-       //   System.out.println(GUI.local_media_table.getItems());
     }
 
     @Override
@@ -83,8 +91,6 @@ public class File_Directory implements Subject_Interface {
     @Override
     public void notifyObservers() {
         for (Observer_Interface ob : observers) {
-
-            System.out.println("Notifying Observers of change in directory");
 
             ob.update();
         }

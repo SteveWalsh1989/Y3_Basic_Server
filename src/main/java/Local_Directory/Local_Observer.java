@@ -1,16 +1,22 @@
+package Local_Directory;
+
+import Interfaces.Observer_Interface;
 import javafx.application.Platform;
+import Controller.*;
 
 import java.io.File;
 
 /**
- * Created by Steve on 03/10/2018.
+ * Observer for the local media file directory
+ *
+ *
  */
-public class User_Observer implements Observer_Interface{
+public class Local_Observer implements  Observer_Interface {
 
 
     @Override
     public void update() {
-        File folder = new File("/Users/Steve/Documents/DistributedSystemsProject/Server");
+        java.io.File folder = new File("/Users/Steve/Documents/DistributedSystemsProject/Local");
 
         String[] fileNames = new String[(int) folder.length()];
 
@@ -18,7 +24,7 @@ public class User_Observer implements Observer_Interface{
             fileNames = folder.list();
         }
 
-        File_Directory.printFileNames(fileNames);
+        Local_File_Directory.printFileNames(fileNames);
 
 
 
@@ -26,10 +32,7 @@ public class User_Observer implements Observer_Interface{
             @Override
             public void run() {
                 // place the code here, that you want to execute
-                Controller.clear_local_list();
-
-
-                Controller.update_local_list();
+                Controller.update();
 
             }
 
@@ -37,7 +40,7 @@ public class User_Observer implements Observer_Interface{
 
 
 
-        File_Directory.hasChanged = false;
+        Local_File_Directory.hasChanged = false;
 
     }
 }
