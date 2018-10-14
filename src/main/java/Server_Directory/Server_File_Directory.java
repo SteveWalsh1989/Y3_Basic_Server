@@ -68,12 +68,14 @@ public class Server_File_Directory implements Subject_Interface {
     public static void printFileNames(String[] files){
 
         System.out.println("Server Directory Files:");
+        System.out.println("----------------------");
 
         for (int i = 0; i < (files.length); i++) {
 
 
             System.out.println(files[i]);
         }
+        System.out.println("----------------------");
 
     }
 

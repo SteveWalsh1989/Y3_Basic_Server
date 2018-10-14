@@ -105,7 +105,7 @@ public class Player_Controller extends BorderPane {
         // change icon to > when paused
         mp.setOnPaused(new Runnable() {
             public void run() {
-                System.out.println("onPaused");
+                System.out.println("Video Paused");
                 playButton.setText(">");
             }
         });

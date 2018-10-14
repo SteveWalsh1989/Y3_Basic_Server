@@ -34,9 +34,12 @@ public class Main_Controller {
 
             // rename file to be stored in local directory
             if (afile.renameTo(new File("/Users/Steve/Documents/DistributedSystemsProject/Local/" + afile.getName()))) {
-                System.out.println("File Download successful!");
+
+                System.out.println("\n-- File Download successful! \n");
+
             } else {
-                System.out.println("File failed to Download!");
+
+                System.out.println("\n-- File failed to Download! \n");
             }
 
         } catch (Exception e) {
@@ -65,9 +68,13 @@ public class Main_Controller {
 
             // rename file to be stored in local directory
             if (afile.renameTo(new File("/Users/Steve/Documents/DistributedSystemsProject/Server/" + afile.getName()))) {
-                System.out.println("File Uploaded successful!");
+
+                System.out.println("\n-- File Uploaded successful! \n");
+
             } else {
-                System.out.println("File failed to Upload!");
+
+                System.out.println("\n--- File failed to Upload!  \n");
+
             }
 
         } catch (Exception e) {

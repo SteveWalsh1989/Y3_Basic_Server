@@ -3,12 +3,17 @@ package GUI;
 import Controller.Main_Controller;
 import Local_Directory.Local_File_Directory;
 import Server_Directory.*;
+import com.sun.javafx.scene.control.skin.ColorPalette;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -31,12 +36,12 @@ public class Main_GUI {
 
     // Local media section
     public static VBox        local_media_box;
-    public static Label       local_media_label;
+    public static Text        local_media_text;
     public static ListView    local_media_list;
 
     // server media section
     public static VBox        server_media_box;
-    public static Label       server_media_label;
+    public static Text        server_media_text;
     public static ListView    server_media_list;
 
     //buttons
@@ -51,7 +56,9 @@ public class Main_GUI {
 
         mainScreen = new HBox();                                                        // create new vBox to tore options
 
-        main_gui = new Scene(mainScreen, 800, 450);                       // Create the Scene // create new scene, add VBOX
+        main_gui = new Scene(mainScreen, 650, 400);                       // Create the Scene // create new scene, add VBOX
+
+        mainScreen.setStyle("-fx-background-color: #E3F1F7");
 
         mainScreen.setAlignment(Pos.CENTER);                                            // center labels and buttons
 
@@ -65,15 +72,25 @@ public class Main_GUI {
 
         server_media_box = new VBox();
 
-        server_media_label   = new Label("Server Media");                               // local media table title
+        server_media_box.setAlignment(Pos.CENTER);
 
-        server_media_label.setMaxHeight(35);
+        server_media_box.setSpacing(15);
+
+        server_media_text   = new Text("Server Media");                               // local media table title
+
+        server_media_text.setFill(Color.valueOf("#3C5964"));
+
+        server_media_text.setFont(Font.font ("Verdana", 20));
 
         server_media_list = new ListView();
 
+        server_media_list.setStyle("-fx-background-color: #CCE9F4");
+        server_media_list.setStyle("-fx-text-fill: #698A96");
+
+
         server_media_list.getItems().addAll(Server_File_Directory.fileNames);
 
-        server_media_box.getChildren().addAll(server_media_label,server_media_list );
+        server_media_box.getChildren().addAll(server_media_text,server_media_list );
 
         //---------------------------
         // Center Section
@@ -93,12 +110,16 @@ public class Main_GUI {
         // Download Button
         download_button = new Button("Download");
 
+        download_button.setStyle("-fx-background-color: #E3F4FB");
+        download_button.setStyle("-fx-text-fill: #3C5964");
+
+
         download_button.setMinWidth(80);
 
         // Button Action
         download_button.setOnAction(e-> {
 
-            System.out.println("User Selected to Download: " + server_media_list.getSelectionModel().getSelectedItem());
+            System.out.println("\n-- User Selected to Download: " + server_media_list.getSelectionModel().getSelectedItem());
 
             Main_Controller.download();
         });
@@ -107,12 +128,17 @@ public class Main_GUI {
         // Upload Button
         upload_button = new Button("Upload");
 
+        upload_button.setStyle("-fx-background-color: #E3F4FB");
+        upload_button.setStyle("-fx-text-fill: #3C5964");
+
+
+
         upload_button.setMinWidth(80);
 
         // Button Action
         upload_button.setOnAction(e-> {
 
-            System.out.println("User Selected to Upload: " + local_media_list.getSelectionModel().getSelectedItem());
+            System.out.println("\n-- User Selected to Upload: " + local_media_list.getSelectionModel().getSelectedItem());
 
             Main_Controller.upload();
         });
@@ -122,10 +148,15 @@ public class Main_GUI {
 
         play_file_button.setMinWidth(80);
 
+        play_file_button.setStyle("-fx-background-color: #E3F4FB");
+        play_file_button.setStyle("-fx-text-fill: #3C5964");
+
+
+
         // Button Action
         play_file_button.setOnAction(e-> {
 
-            System.out.println("User Selected to Play: " + local_media_list.getSelectionModel().getSelectedItem());
+            System.out.println("\n-- User Selected to Play: " + local_media_list.getSelectionModel().getSelectedItem());
 
             Main_Controller.play(); // Load Media Player
 
@@ -136,6 +167,9 @@ public class Main_GUI {
 
         // clear button
         clear_button = new Button("Clear");
+
+        clear_button.setStyle("-fx-background-color: #E3F4FB");
+        clear_button.setStyle("-fx-text-fill: #3C5964");
 
         clear_button.setMinWidth(80);
 
@@ -154,28 +188,35 @@ public class Main_GUI {
         //---------------------------
         local_media_box = new VBox();
 
-        local_media_label   = new Label("Local Media");
+        local_media_box.setAlignment(Pos.CENTER);
 
-        local_media_label.setMaxHeight(35);
+        local_media_box.setSpacing(15);
+
+        local_media_text   = new Text("Local Media");
+
+        local_media_text.setFill(Color.valueOf("#3C5964"));
+
+        local_media_text.setFont(Font.font ("Verdana", 20));
 
         local_media_list = new ListView();
 
         local_media_list.getItems().addAll(Local_File_Directory.fileNames);                   // add items from directory to list
 
-        local_media_box.getChildren().addAll(local_media_label,local_media_list );            // add label and list to VBox
+        local_media_box.getChildren().addAll(local_media_text,local_media_list );            // add label and list to VBox
 
         // Set main Scene and Stage
         mainScreen.getChildren().addAll(local_media_box, center_section, server_media_box);   // add 3 sections to main hbox
+
 
         primaryStage.setTitle("R00151053 Distributed Systems Project");                       // set title of primary stage
 
         primaryStage.setScene(main_gui);                                                      // add homePage scene to primary stage
 
         primaryStage.setMaxWidth(650);
-        primaryStage.setMinWidth(450);
+        primaryStage.setMinWidth(650);
 
-        primaryStage.setMaxHeight(700);
-        primaryStage.setMinHeight(500);
+        primaryStage.setMaxHeight(450);
+        primaryStage.setMinHeight(450);
 
         primaryStage.show();                                                            // show primary stage
 
