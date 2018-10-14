@@ -14,8 +14,6 @@ import static GUI.Player_GUI.load_player_GUI;
 
 public class Controller {
 
-
-
     /**
      * download
      * <p>
@@ -79,6 +77,12 @@ public class Controller {
         update();
     }
 
+    public static void play() {
+
+        load_player_GUI(); // Load Media Player
+
+    }
+
 
     public static void update(){
         local_media_list.getItems().clear();
@@ -86,14 +90,9 @@ public class Controller {
         local_media_list.getItems().addAll(Local_File_Directory.fileNames);
         server_media_list.getItems().addAll(Server_File_Directory.fileNames);
 
-
     }
 
-    public static void play() {
 
-            load_player_GUI(); // Load Media Player
-
-    }
 }
 
 

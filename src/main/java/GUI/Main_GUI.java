@@ -13,7 +13,16 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Steve on 07/10/2018.
+ * Main_GUI
+ *
+ * Main dashboard for application
+ *
+ * User Can select from Local or Server Directories
+ *
+ * Upload Button   : move files from local to server
+ * DownLoad Button : move files from server to local
+ * Play Button     : play local file
+ * Clear Button    : clear list selection
  */
 public class Main_GUI {
 
@@ -86,6 +95,7 @@ public class Main_GUI {
 
         download_button.setMinWidth(80);
 
+        // Button Action
         download_button.setOnAction(e-> {
 
             System.out.println("User Selected to Download: " + server_media_list.getSelectionModel().getSelectedItem());
@@ -99,6 +109,7 @@ public class Main_GUI {
 
         upload_button.setMinWidth(80);
 
+        // Button Action
         upload_button.setOnAction(e-> {
 
             System.out.println("User Selected to Upload: " + local_media_list.getSelectionModel().getSelectedItem());
@@ -111,6 +122,7 @@ public class Main_GUI {
 
         play_file_button.setMinWidth(80);
 
+        // Button Action
         play_file_button.setOnAction(e-> {
 
             System.out.println("User Selected to Play: " + local_media_list.getSelectionModel().getSelectedItem());
@@ -127,18 +139,14 @@ public class Main_GUI {
 
         clear_button.setMinWidth(80);
 
+        // Button Action
         clear_button.setOnAction(e -> {
 
           clear_selection(); // clear list views
 
         });
 
-
-
         center_section.getChildren().addAll(download_button,upload_button,play_file_button,spacingLabel, clear_button );
-
-
-
 
 
         //---------------------------

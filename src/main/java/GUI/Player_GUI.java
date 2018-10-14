@@ -2,12 +2,14 @@ package GUI;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import Controller.*;
 
 
 import static GUI.Main_GUI.local_media_list;
@@ -17,29 +19,15 @@ import static GUI.Main_GUI.local_media_list;
  */
 public class Player_GUI {
 
-    public static VBox mainScreen;
-    public static Scene playerScene;
-
 
     public static void load_player_GUI (){
+        Stage media_stage = new Stage();
 
-        Stage playerStage = new Stage();
+        // set title of stage to show media name
+        media_stage.setTitle("Now Playing: " + local_media_list.getSelectionModel().getSelectedItem().toString());
 
-        mainScreen = new VBox();
-
-        playerScene = new Scene(mainScreen, 800, 450);
-
-        mainScreen.setAlignment(Pos.CENTER);                                            // center labels and buttons
-
-        mainScreen.setSpacing(25);                                                      // add spacing between elements
-
-        mainScreen.setPadding(new Insets(10,10,10,10));          // add padding around sections
-
-        //----------------------
-        // Media Player
-        //----------------------
-
-        StackPane mediaContainer = new StackPane();
+        Group root = new Group();
+        Scene scene = new Scene(root, 540, 210);
 
 
         // Create the media source.
@@ -48,31 +36,18 @@ public class Player_GUI {
         Media media = new Media(source);
 
         // Create the player and set to play automatically.
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+        MediaPlayer mediaPlayerView = new MediaPlayer(media);
+        mediaPlayerView.setAutoPlay(true);
 
-        // Create the view and add it to the Scene.
-        MediaView mediaView = new MediaView(mediaPlayer);
-
-
-
-        mediaContainer.getChildren().add(mediaView);
+        Player_Controller mediaControl = new Player_Controller(mediaPlayerView);
+        scene.setRoot(mediaControl);
 
 
-        mainScreen.getChildren().addAll(mediaContainer);
 
+        media_stage.setScene(scene);
+        media_stage.sizeToScene();
+        media_stage.show();
 
-        playerStage.setTitle("Media Player");                       // set title of primary stage
-
-        playerStage.setScene(playerScene);
-
-        playerStage.setMaxWidth(650);
-        playerStage.setMinWidth(450);
-
-        playerStage.setMaxHeight(700);
-        playerStage.setMinHeight(500);
-
-        playerStage.show();
 
 
     }
